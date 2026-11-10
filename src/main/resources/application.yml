@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: balance-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/balance}
+    username: ${DB_USERNAME:balance}
+    password: ${DB_PASSWORD:balance}
+    hikari:
+      maximum-pool-size: ${DB_POOL_SIZE:20}
+      # Don't let a request wait forever behind a hot account; the client gets a 503 and retries.
+      connection-init-sql: SET lock_timeout = '5s'
+  jpa:
+    open-in-view: false
+    hibernate:
+      # Flyway owns the schema
+      ddl-auto: none
+  flyway:
+    enabled: true
+
+server:
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true

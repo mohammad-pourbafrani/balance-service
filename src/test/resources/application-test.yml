@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:balance;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ""
+    hikari:
+      maximum-pool-size: 20
+      # H2 syntax; milliseconds
+      connection-init-sql: SET LOCK_TIMEOUT 10000
+
+logging:
+  level:
+    com.example.balance: WARN
